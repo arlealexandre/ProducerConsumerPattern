@@ -6,7 +6,7 @@
     <!-- Properties -->
     <property name="src" location="src"/>
     <property name="build" location="build"/>
-    <property name="main-class" value="Main"/>
+    <property name="main-class" value="TestProdCons"/>
 
     <!-- Target: init -->
     <target name="init">
