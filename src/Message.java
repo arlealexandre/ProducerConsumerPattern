@@ -8,4 +8,8 @@ public class Message {
     Message () {
         this.message = "Default message";
     }
+
+    public String toString() {
+        return "'"+message+"'";
+    }
 }
