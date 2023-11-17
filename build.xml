@@ -1,0 +1,43 @@
+<project name="Projet-PC-Prod-Cons" basedir=".">
+
+    <!-- Description -->
+    <description>Projet 2023 de Programmation Concurrente à réaliser en binôme : producteurs-consommateurs</description>
+
+    <!-- Properties -->
+    <property name="src" location="src"/>
+    <property name="build" location="build"/>
+    <property name="main-class" value="Main"/>
+
+    <!-- Target: init -->
+    <target name="init">
+        <echo message="Creating ./build directory..."/> 
+        <mkdir dir="${build}"/>
+    </target>
+
+    <!-- Target: compile -->
+    <target name="compile" depends="init">
+        <echo message="Compiling ./src directory..."/>
+        <javac srcdir="${src}" destdir="${build}">
+            <classpath>
+                <pathelement location="${build}"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <!-- Target: run -->
+    <target name="run" depends="compile">
+        <echo message="Running Main program..."/>
+        <java classname="${main-class}" fork="true">
+            <classpath>
+                <pathelement location="${build}"/>
+            </classpath>
+        </java>
+    </target>
+
+    <!-- Target: clean -->
+    <target name="clean"> 
+        <echo message="Cleaning..."/>
+        <delete dir="${build}"/>
+    </target>
+
+</project>
