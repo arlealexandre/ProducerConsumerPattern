@@ -1,3 +1,4 @@
+package obj1;
 public class Producer extends Thread {
 
     private ProdConsBuffer buffer;
@@ -9,7 +10,6 @@ public class Producer extends Thread {
     public void run() {
         Message m = new Message("*");
         this.buffer.put(m);
-        System.out.println("Prod"+getName()+" a écrit "+m.toString());
     }
 
 }

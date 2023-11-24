@@ -1,3 +1,4 @@
+package obj1;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,7 +9,8 @@ public class TestProdCons {
 
     public static void main(String[] args) throws InvalidPropertiesFormatException, IOException {
 
-        ArrayList<Thread> threads = new ArrayList<>();
+        ArrayList<Thread> threadsProd = new ArrayList<>();
+        ArrayList<Thread> threadsCons = new ArrayList<>();
 
         Properties properties = new Properties();
         properties.loadFromXML(new FileInputStream("options.xml"));
@@ -28,28 +30,16 @@ public class TestProdCons {
         for (int i=0; i<nProd; i++) {
             Producer p = new Producer(buffer);
             p.setName(String.valueOf(i));
-            threads.add(p);
+            threadsProd.add(p);
+            p.start();
         }
 
         // Création des consommateurs
         for (int i=0; i<nCons; i++) {
             Consumer c = new Consumer(buffer);
             c.setName(String.valueOf(i));
-            threads.add(c);
-        }
-
-        // Lancement des threads
-        for (Thread t : threads) {
-            t.start();
-        }
-
-        // Attente des threads
-        for (Thread t : threads) {
-            try {
-                t.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            threadsCons.add(c);
+            c.start();
         }
 
     }

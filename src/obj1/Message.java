@@ -1,3 +1,4 @@
+package obj1;
 public class Message {
     String message;
 

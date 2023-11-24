@@ -1,3 +1,4 @@
+package obj1;
 public class Consumer extends Thread {
 
     private ProdConsBuffer buffer;
@@ -9,7 +10,6 @@ public class Consumer extends Thread {
     public void run() {
         try {
             Message m = this.buffer.get();
-            System.out.println("Cons"+this.getName()+" a lu "+m.toString());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

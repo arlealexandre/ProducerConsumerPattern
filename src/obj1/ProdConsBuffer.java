@@ -1,3 +1,4 @@
+package obj1;
 public class ProdConsBuffer implements IProdConsBuffer {
     Message[] buffer;
     int nbMessage;
@@ -32,14 +33,15 @@ public class ProdConsBuffer implements IProdConsBuffer {
             try { wait(); } catch (InterruptedException e) { e.printStackTrace(); }
         }
 
+        int prodTime = (int)Math.floor(Math.random() * this.maxProdTime); // We randomised prodTime for better result but we keep an average of "prodTime"
+        try { Thread.sleep(prodTime); } catch (InterruptedException e) { e.printStackTrace(); }
+
         this.buffer[in] = m;
         this.in = (in + 1) % size;
         this.nbMessage++;
         this.totalNbMessage++;
 
-        int prodTime = (int)Math.floor(Math.random() * this.maxProdTime); // We randomised prodTime for better result but we keep an average of "prodTime"
-        try { Thread.sleep(prodTime); } catch (InterruptedException e) { e.printStackTrace(); }
-
+        System.out.println("Prod"+Thread.currentThread().getName()+" a écrit "+m.toString());
         notifyAll();
     }
 
@@ -48,13 +50,14 @@ public class ProdConsBuffer implements IProdConsBuffer {
             wait();
         }
 
+        int consTime = (int)Math.floor(Math.random() * this.maxConsTime); // We randomised consTime for better result but we keep an average of "consTime"
+        try { Thread.sleep(consTime); } catch (InterruptedException e) { e.printStackTrace(); }
+
         Message res = this.buffer[out];
         this.out = (out + 1) % size;
         this.nbMessage--;
 
-        int consTime = (int)Math.floor(Math.random() * this.maxConsTime); // We randomised consTime for better result but we keep an average of "consTime"
-        try { Thread.sleep(consTime); } catch (InterruptedException e) { e.printStackTrace(); }
-        
+        System.out.println("Cons"+Thread.currentThread().getName()+" a lu "+res.toString());
         notifyAll();
         
         return res;

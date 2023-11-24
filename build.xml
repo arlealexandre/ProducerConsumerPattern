@@ -8,8 +8,14 @@
     <property name="build" location="build"/>
     <property name="main-class" value="TestProdCons"/>
 
+    <!-- Target: clean -->
+    <target name="clean"> 
+        <echo message="Cleaning..."/>
+        <delete dir="${build}"/>
+    </target>
+
     <!-- Target: init -->
-    <target name="init">
+    <target name="init" depends="clean">
         <echo message="Creating ./build directory..."/> 
         <mkdir dir="${build}"/>
     </target>
@@ -24,20 +30,24 @@
         </javac>
     </target>
 
-    <!-- Target: run -->
-    <target name="run" depends="compile">
-        <echo message="Running Main program..."/>
-        <java classname="${main-class}" fork="true">
+    <!-- Target: run obj1 -->
+    <target name="obj1" depends="compile">
+        <echo message="Running objectif1 program..."/>
+        <java classname="obj1.${main-class}" fork="true">
             <classpath>
                 <pathelement location="${build}"/>
             </classpath>
         </java>
     </target>
 
-    <!-- Target: clean -->
-    <target name="clean"> 
-        <echo message="Cleaning..."/>
-        <delete dir="${build}"/>
+    <!-- Target: run obj2 -->
+    <target name="obj2" depends="compile">
+        <echo message="Running objectif2 program..."/>
+        <java classname="obj2.${main-class}" fork="true">
+            <classpath>
+                <pathelement location="${build}"/>
+            </classpath>
+        </java>
     </target>
 
 </project>
