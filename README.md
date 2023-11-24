@@ -2,9 +2,11 @@
 
 ## Run the code
 
-1. ```ant clean``` to remove/clean the /build repository
-2. ```ant compile``` to compile the /src directory
-3. ```ant run``` to run /build/Main.class
+```ant [obj_name]``` to run the main class in the package [obj_name]
+
+The different objective are the following:
+- obj1
+- obj2
 
 ## Run project under Eclipse
 
