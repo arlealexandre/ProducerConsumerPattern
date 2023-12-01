@@ -8,10 +8,12 @@ public class Consumer extends Thread {
     }
 
     public void run() {
-        try {
-            Message m = this.buffer.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (!buffer.isTerminated()) {
+            try {
+                Message m = this.buffer.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
     

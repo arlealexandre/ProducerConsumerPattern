@@ -12,6 +12,8 @@ public class ProdConsBuffer implements IProdConsBuffer {
     int maxProdTime;
     int maxConsTime;
 
+    boolean terminated;
+
     /* 
      * Parameter : 
      * - size : The size of the buffer
@@ -26,9 +28,11 @@ public class ProdConsBuffer implements IProdConsBuffer {
         this.size = size;
         this.maxProdTime = (prodTime * 2 ) - 1;
         this.maxConsTime = (consTime * 2) - 1;
+        this.terminated=false;
     }
 
     public synchronized void put(Message m) {
+    
         while (this.nbMessage == size) {
             try { wait(); } catch (InterruptedException e) { e.printStackTrace(); }
         }
@@ -36,16 +40,22 @@ public class ProdConsBuffer implements IProdConsBuffer {
         int prodTime = (int)Math.floor(Math.random() * this.maxProdTime); // We randomised prodTime for better result but we keep an average of "prodTime"
         try { Thread.sleep(prodTime); } catch (InterruptedException e) { e.printStackTrace(); }
 
+        System.out.println("Prod"+Thread.currentThread().getName()+" a écrit "+m.toString()+" dans la case n°"+Integer.toString(in));
+
         this.buffer[in] = m;
         this.in = (in + 1) % size;
         this.nbMessage++;
         this.totalNbMessage++;
 
-        System.out.println("Prod"+Thread.currentThread().getName()+" a écrit "+m.toString());
+        if (totalNbMessage==size) {
+            terminated=true;
+        }
+
         notifyAll();
     }
 
     public synchronized Message get() throws InterruptedException {
+
         while (this.nbMessage == 0) {
             wait();
         }
@@ -54,10 +64,12 @@ public class ProdConsBuffer implements IProdConsBuffer {
         try { Thread.sleep(consTime); } catch (InterruptedException e) { e.printStackTrace(); }
 
         Message res = this.buffer[out];
+
+        System.out.println("Cons"+Thread.currentThread().getName()+" a lu "+res.toString()+" dans la case n°"+Integer.toString(out));
+
         this.out = (out + 1) % size;
         this.nbMessage--;
 
-        System.out.println("Cons"+Thread.currentThread().getName()+" a lu "+res.toString());
         notifyAll();
         
         return res;
@@ -69,5 +81,9 @@ public class ProdConsBuffer implements IProdConsBuffer {
 
     public int totmsg() {
         return this.totalNbMessage;
+    }
+
+    public boolean isTerminated() {
+        return terminated;
     }
 }
