@@ -7,6 +7,7 @@
 The different objective are the following:
 - obj1
 - obj2
+- obj3
 
 ## Run project under Eclipse
 
