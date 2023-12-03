@@ -1,12 +1,14 @@
 package obj1;
-public class Message {
-    String message;
 
-    Message (String mes) {
+public class Message {
+
+    private String message;
+
+    public Message (String mes) {
         this.message = mes;
     }
 
-    Message () {
+    public Message () {
         this.message = "Default message";
     }
 

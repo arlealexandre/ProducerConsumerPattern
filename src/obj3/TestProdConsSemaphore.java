@@ -5,11 +5,7 @@ import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
-import obj1.Consumer;
-import obj1.ProdConsBuffer;
-import obj1.Producer;
-
-public class TestProdCons {
+public class TestProdConsSemaphore {
 
     public static void main(String[] args) throws InvalidPropertiesFormatException, IOException {
 
@@ -30,18 +26,18 @@ public class TestProdCons {
         System.out.println("BUFFER SIZE = "+Integer.toString(sizeB)+"\n");
 
         // Création du buffer
-        ProdConsBuffer buffer = new ProdConsBuffer(sizeB,prodTime,consTime);
+        ProdConsBufferSemaphore buffer = new ProdConsBufferSemaphore(sizeB,prodTime,consTime);
 
         // Création des producteurs
         for (int i=0; i<nProd; i++) {
-            Producer p = new Producer(buffer,minProd,maxProd);
+            ProducerSemaphore p = new ProducerSemaphore(buffer,minProd,maxProd);
             p.setName(String.valueOf(i));
             threadsProd.add(p);
         }
 
         // Création des consommateurs
         for (int i=0; i<nCons; i++) {
-            Consumer c = new Consumer(buffer);
+            ConsumerSemaphore c = new ConsumerSemaphore(buffer);
             c.setName(String.valueOf(i));
             threadsCons.add(c);
         }

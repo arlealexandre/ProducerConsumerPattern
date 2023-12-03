@@ -1,10 +1,10 @@
-package obj1;
+package obj3;
 
-public class Consumer extends Thread {
+public class ConsumerSemaphore extends Thread {
 
-    private ProdConsBuffer buffer;
+    private ProdConsBufferSemaphore buffer;
 
-    public Consumer(ProdConsBuffer b) {
+    public ConsumerSemaphore(ProdConsBufferSemaphore b) {
         this.buffer = b;
     }
 

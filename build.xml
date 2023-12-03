@@ -7,6 +7,7 @@
     <property name="src" location="src"/>
     <property name="build" location="build"/>
     <property name="main-class" value="TestProdCons"/>
+    <property name="main-class-semaphore" value="TestProdConsSemaphore"/>
 
     <!-- Target: clean -->
     <target name="clean"> 
@@ -53,7 +54,7 @@
     <!-- Target: run obj3 -->
     <target name="obj3" depends="compile">
         <echo message="Running objectif3 program..."/>
-        <java classname="obj3.${main-class}" fork="true">
+        <java classname="obj3.${main-class-semaphore}" fork="true">
             <classpath>
                 <pathelement location="${build}"/>
             </classpath>
