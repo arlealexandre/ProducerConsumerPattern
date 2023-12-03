@@ -50,4 +50,14 @@
         </java>
     </target>
 
+    <!-- Target: run obj3 -->
+    <target name="obj3" depends="compile">
+        <echo message="Running objectif3 program..."/>
+        <java classname="obj3.${main-class}" fork="true">
+            <classpath>
+                <pathelement location="${build}"/>
+            </classpath>
+        </java>
+    </target>
+
 </project>
