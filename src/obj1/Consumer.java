@@ -8,7 +8,7 @@ public class Consumer extends Thread {
     }
 
     public void run() {
-        while (!buffer.isTerminated()) {
+        while (true) {
             try {
                 Message m = this.buffer.get();
             } catch (InterruptedException e) {

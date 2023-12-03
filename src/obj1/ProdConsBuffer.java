@@ -12,15 +12,13 @@ public class ProdConsBuffer implements IProdConsBuffer {
     int maxProdTime;
     int maxConsTime;
 
-    boolean terminated;
-
     /* 
      * Parameter : 
      * - size : The size of the buffer
      * - prodTime : The average time a production of a message take
      * - consTime : The average time a consommation of a message take 
      */
-    ProdConsBuffer (int size, int prodTime, int consTime) {
+    public ProdConsBuffer (int size, int prodTime, int consTime) {
         this.buffer = new Message[size];
         this.nbMessage = 0;
         this.in = 0;
@@ -28,7 +26,6 @@ public class ProdConsBuffer implements IProdConsBuffer {
         this.size = size;
         this.maxProdTime = (prodTime * 2 ) - 1;
         this.maxConsTime = (consTime * 2) - 1;
-        this.terminated=false;
     }
 
     public synchronized void put(Message m) {
@@ -46,10 +43,6 @@ public class ProdConsBuffer implements IProdConsBuffer {
         this.in = (in + 1) % size;
         this.nbMessage++;
         this.totalNbMessage++;
-
-        if (totalNbMessage==size) {
-            terminated=true;
-        }
 
         notifyAll();
     }
@@ -83,7 +76,4 @@ public class ProdConsBuffer implements IProdConsBuffer {
         return this.totalNbMessage;
     }
 
-    public boolean isTerminated() {
-        return terminated;
-    }
 }
