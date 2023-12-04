@@ -1,26 +1,17 @@
-package obj3;
+package obj1;
+public class ProdConsBufferMonitor extends ProdConsBuffer {
 
-import java.util.concurrent.Semaphore;
-
-import obj1.Message;
-import obj1.ProdConsBuffer;
-
-public class ProdConsBufferSemaphore extends ProdConsBuffer {
-
-    Semaphore notFull, notEmpty, mutex;
-
-    public ProdConsBufferSemaphore (int size, int prodTime, int consTime) {
-        super(size,prodTime,consTime);
-        this.notFull = new Semaphore(size, true);
-        this.notEmpty = new Semaphore(0, true);
-        this.mutex = new Semaphore(1, true);
+   
+    public ProdConsBufferMonitor (int size, int prodTime, int consTime) {
+        super(size, consTime, consTime);
     }
 
-    public void put(Message m) {
+    public synchronized void put(Message m) {
     
-        try { notFull.acquire(); } catch (InterruptedException e) { e.printStackTrace(); }
+        while (this.nbMessage == size) {
+            try { wait(); } catch (InterruptedException e) { e.printStackTrace(); }
+        }
 
-        try { mutex.acquire(); } catch (InterruptedException e) { e.printStackTrace(); }
         int prodTime = (int)Math.floor(Math.random() * this.maxProdTime); // We randomised prodTime for better result but we keep an average of "prodTime"
         try { Thread.sleep(prodTime); } catch (InterruptedException e) { e.printStackTrace(); }
 
@@ -30,16 +21,16 @@ public class ProdConsBufferSemaphore extends ProdConsBuffer {
         this.in = (in + 1) % size;
         this.nbMessage++;
         this.totalNbMessage++;
-        mutex.release();
 
-        notEmpty.release();
+        notifyAll();
     }
 
-    public Message get() throws InterruptedException {
+    public synchronized Message get() throws InterruptedException {
 
-        try { notEmpty.acquire(); } catch (InterruptedException e) { e.printStackTrace(); }
+        while (this.nbMessage == 0) {
+            wait();
+        }
 
-        try { mutex.acquire(); } catch (InterruptedException e) { e.printStackTrace(); }
         int consTime = (int)Math.floor(Math.random() * this.maxConsTime); // We randomised consTime for better result but we keep an average of "consTime"
         try { Thread.sleep(consTime); } catch (InterruptedException e) { e.printStackTrace(); }
 
@@ -49,9 +40,8 @@ public class ProdConsBufferSemaphore extends ProdConsBuffer {
 
         this.out = (out + 1) % size;
         this.nbMessage--;
-        mutex.release();
 
-        notFull.release();
+        notifyAll();
         
         return res;
     }

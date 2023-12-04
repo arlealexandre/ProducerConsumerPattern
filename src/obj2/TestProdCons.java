@@ -6,7 +6,7 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
 import obj1.Consumer;
-import obj1.ProdConsBuffer;
+import obj1.ProdConsBufferMonitor;
 import obj1.Producer;
 
 public class TestProdCons {
@@ -30,7 +30,7 @@ public class TestProdCons {
         System.out.println("BUFFER SIZE = "+Integer.toString(sizeB)+"\n");
 
         // Création du buffer
-        ProdConsBuffer buffer = new ProdConsBuffer(sizeB,prodTime,consTime);
+        ProdConsBufferMonitor buffer = new ProdConsBufferMonitor(sizeB,prodTime,consTime);
 
         // Création des producteurs
         for (int i=0; i<nProd; i++) {

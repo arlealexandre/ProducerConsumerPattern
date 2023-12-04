@@ -8,6 +8,7 @@
     <property name="build" location="build"/>
     <property name="main-class" value="TestProdCons"/>
     <property name="main-class-semaphore" value="TestProdConsSemaphore"/>
+    <property name="main-class-lock" value="TestProdConsLock"/>
 
     <!-- Target: clean -->
     <target name="clean"> 
@@ -55,6 +56,16 @@
     <target name="obj3" depends="compile">
         <echo message="Running objectif3 program..."/>
         <java classname="obj3.${main-class-semaphore}" fork="true">
+            <classpath>
+                <pathelement location="${build}"/>
+            </classpath>
+        </java>
+    </target>
+
+     <!-- Target: run obj4 -->
+    <target name="obj4" depends="compile">
+        <echo message="Running objectif4 program..."/>
+        <java classname="obj4.${main-class-lock}" fork="true">
             <classpath>
                 <pathelement location="${build}"/>
             </classpath>

@@ -17,7 +17,9 @@ public class Producer extends Thread {
     public void run() {
         for (int i=0; i<nbMessage; i++) {
             Message m = new Message("*");
-            this.buffer.put(m);
+            try {
+                this.buffer.put(m);
+            } catch (InterruptedException e) { e.printStackTrace(); }
         }
     }
 
