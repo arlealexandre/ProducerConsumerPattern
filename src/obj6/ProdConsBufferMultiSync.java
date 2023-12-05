@@ -74,4 +74,9 @@ public class ProdConsBufferMultiSync extends ProdConsBuffer {
 
     }
 
+    @Override
+    public Message[] get(int k) throws InterruptedException {
+        throw new UnsupportedOperationException("Unimplemented method 'get'");
+    }
+
 }

@@ -46,4 +46,9 @@ public class ProdConsBufferMonitor extends ProdConsBuffer {
         return res;
     }
 
+    @Override
+    public Message[] get(int k) throws InterruptedException {
+        throw new UnsupportedOperationException("Unimplemented method 'get'");
+    }
+
 }
