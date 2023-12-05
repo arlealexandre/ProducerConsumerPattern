@@ -9,6 +9,8 @@
     <property name="main-class" value="TestProdCons"/>
     <property name="main-class-semaphore" value="TestProdConsSemaphore"/>
     <property name="main-class-lock" value="TestProdConsLock"/>
+    <property name="main-class-multi" value="TestProdConsMulti"/>
+    <property name="main-class-multisync" value="TestProdConsMultiSync"/>
 
     <!-- Target: clean -->
     <target name="clean"> 
@@ -62,10 +64,30 @@
         </java>
     </target>
 
-     <!-- Target: run obj4 -->
+    <!-- Target: run obj4 -->
     <target name="obj4" depends="compile">
         <echo message="Running objectif4 program..."/>
         <java classname="obj4.${main-class-lock}" fork="true">
+            <classpath>
+                <pathelement location="${build}"/>
+            </classpath>
+        </java>
+    </target>
+
+    <!-- Target: run obj5 -->
+    <target name="obj5" depends="compile">
+        <echo message="Running objectif5 program..."/>
+        <java classname="obj5.${main-class-multi}" fork="true">
+            <classpath>
+                <pathelement location="${build}"/>
+            </classpath>
+        </java>
+    </target>
+
+    <!-- Target: run obj6 -->
+    <target name="obj6" depends="compile">
+        <echo message="Running objectif6 program..."/>
+        <java classname="obj6.${main-class-multisync}" fork="true">
             <classpath>
                 <pathelement location="${build}"/>
             </classpath>

@@ -1,4 +1,4 @@
-package obj4;
+package obj5;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -6,12 +6,12 @@ import java.util.concurrent.locks.ReentrantLock;
 import obj1.Message;
 import obj1.ProdConsBuffer;
 
-public class ProdConsBufferLock extends ProdConsBuffer {
+public class ProdConsBufferMulti extends ProdConsBuffer {
 
     ReentrantLock lock;
     Condition notEmpty, notFull;
 
-    public ProdConsBufferLock (int size, int prodTime, int consTime) {
+    public ProdConsBufferMulti (int size, int prodTime, int consTime) {
         super(size,prodTime,consTime);
         this.lock = new ReentrantLock();
         this.notEmpty = lock.newCondition();
