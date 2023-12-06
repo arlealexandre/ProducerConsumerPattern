@@ -1,9 +1,20 @@
 package obj1;
+
 public interface IProdConsBuffer {
+    
     /**
      * Put the message m in the buffer
      **/
     public void put(Message m) throws InterruptedException;
+
+    /**
+     * Put n instances of the message m in the prodcons buffer
+     * The current thread is blocked until all
+     * instances of the message have been consumed
+     * Any consumer of m is also blocked until all the instances of
+     * the message have been consumed
+     **/
+    public void put(Message m, int n) throws InterruptedException;
 
     /**
      * Retrieve a message from the buffer,

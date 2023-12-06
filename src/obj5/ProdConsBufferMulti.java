@@ -74,4 +74,10 @@ public class ProdConsBufferMulti extends ProdConsBuffer {
 
     }
 
+    @Override
+    public void put(Message m, int n) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'put'");
+    }
+
 }

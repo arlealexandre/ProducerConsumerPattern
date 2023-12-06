@@ -41,4 +41,7 @@ public abstract class ProdConsBuffer implements IProdConsBuffer {
     public int totmsg() {
         return this.totalNbMessage;
     }
+
+    public void put(Message m, int n) {
+    }
 }

@@ -58,4 +58,10 @@ public class ProdConsBufferSemaphore extends ProdConsBuffer {
         return res;
     }
 
+    @Override
+    public void put(Message m, int n) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'put'");
+    }
+
 }

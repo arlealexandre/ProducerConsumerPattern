@@ -6,7 +6,6 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
 import obj1.Consumer;
-import obj1.Producer;
 
 public class TestProdConsMultiSync {
 
@@ -33,7 +32,7 @@ public class TestProdConsMultiSync {
 
         // Création des producteurs
         for (int i=0; i<nProd; i++) {
-            Producer p = new Producer(buffer,minProd,maxProd);
+            ProducerMultiSync p = new ProducerMultiSync(buffer,minProd,maxProd);
             p.setName(String.valueOf(i));
             threadsProd.add(p);
         }
