@@ -48,8 +48,12 @@ public class ProdConsBufferMonitor extends ProdConsBuffer {
 
     @Override
     public void put(Message m, int n) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'put'");
+    }
+
+    @Override
+    public Message[] get(int k) throws InterruptedException {
+        throw new UnsupportedOperationException("Unimplemented method 'get'");
     }
 
 }

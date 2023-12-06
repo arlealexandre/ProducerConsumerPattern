@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
-import obj1.Consumer;
 import obj1.Producer;
 
 public class TestProdConsMulti {
@@ -40,7 +39,7 @@ public class TestProdConsMulti {
 
         // Création des consommateurs
         for (int i=0; i<nCons; i++) {
-            Consumer c = new Consumer(buffer);
+            Consumer c = new Consumer(buffer, 5);
             c.setName(String.valueOf(i));
             threadsCons.add(c);
         }
