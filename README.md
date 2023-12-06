@@ -8,6 +8,9 @@ The different objective are the following:
 - obj1
 - obj2
 - obj3
+- obj4
+- obj5
+- obj6
 
 ## Run project under Eclipse
 
