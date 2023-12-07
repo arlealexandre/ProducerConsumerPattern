@@ -1,7 +1,8 @@
+<!-- !! DO NOT UPDATE THIS BUILD FILE !! -->
 <project name="Projet-PC-Prod-Cons" basedir=".">
 
     <!-- Description -->
-    <description>Projet 2023 de Programmation Concurrente à réaliser en binôme : producteurs-consommateurs</description>
+    <description>Producer-Consumer concurrent programming project</description>
 
     <!-- Properties -->
     <property name="src" location="src"/>

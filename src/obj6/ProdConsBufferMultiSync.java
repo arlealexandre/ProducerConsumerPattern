@@ -11,6 +11,7 @@ public class ProdConsBufferMultiSync extends ProdConsBuffer {
 
     public synchronized void put(Message m, int n) {
     
+        // If 
         while ((this.nbMessage + n > size)) {
             try { wait(); } catch (InterruptedException e) { e.printStackTrace(); }
         }
@@ -19,18 +20,21 @@ public class ProdConsBufferMultiSync extends ProdConsBuffer {
         try { Thread.sleep(prodTime); } catch (InterruptedException e) { e.printStackTrace(); }
 
         for (int i=1; i<=n; i++) { // put n copies of message m
+            System.out.println("Prod"+Thread.currentThread().getName()+" a écrit "+m.toString()+" copie n°"+Integer.toString(i)+"/"+Integer.toString(n)+" dans la case n°"+Integer.toString(in));
             this.buffer[in] = m;
             this.in = (in + 1) % size;
             this.nbMessage++;
             this.totalNbMessage++;
-            System.out.println("Prod"+Thread.currentThread().getName()+" a écrit "+m.toString()+" copie n°"+Integer.toString(i)+"/"+Integer.toString(n)+" dans la case n°"+Integer.toString(in));
+            notify();
         }
 
         while ((!((MessageMultiSync)m).isMessageConsumed())) {
+            System.out.println("Prod"+Thread.currentThread().getName()+" attend ");
             try { wait(); } catch (InterruptedException e) { e.printStackTrace(); }
         }
 
         notifyAll();
+        System.out.println("Prod"+Thread.currentThread().getName()+" libre");
     }
 
     public void put(Message m) {
@@ -38,7 +42,9 @@ public class ProdConsBufferMultiSync extends ProdConsBuffer {
     }
 
     public synchronized Message get() throws InterruptedException {
-
+        
+        System.out.println("Cons"+Thread.currentThread().getName()+" veut lire");
+        
         while (this.nbMessage == 0) {
             wait();
         }
@@ -56,8 +62,8 @@ public class ProdConsBufferMultiSync extends ProdConsBuffer {
         resMS.copyConsumed();
 
         while (!(resMS.isMessageConsumed())) {
+            System.out.println("Cons"+Thread.currentThread().getName()+" attend ");
             try { wait(); } catch (InterruptedException e) { e.printStackTrace(); }
-            System.out.println("Cons"+Thread.currentThread().getName()+" a lu "+res.toString()+" dans la case n°"+Integer.toString(out));
         }
 
         notifyAll();

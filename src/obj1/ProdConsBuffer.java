@@ -44,4 +44,8 @@ public abstract class ProdConsBuffer implements IProdConsBuffer {
 
     public void put(Message m, int n) {
     }
+
+    public int getSize() {
+        return size;
+    }
 }

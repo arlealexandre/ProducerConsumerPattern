@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-    <entry key="nProd">3</entry>
-    <entry key="nCons">10</entry>
-    <entry key="bufSz">3</entry>
-    <entry key="prodTime">5</entry>
-    <entry key="consTime">5</entry>
-    <entry key="minProd">1</entry>
-    <entry key="maxProd">1</entry>
+    <entry key="nProd">10</entry>       <!-- number of producer                                     -->
+    <entry key="nCons">15</entry>       <!-- number of consumer                                     -->
+    <entry key="bufSz">5</entry>        <!-- buffer size                                            -->
+    <entry key="prodTime">5</entry>     <!-- production time used by producer                       -->
+    <entry key="consTime">5</entry>     <!-- consumption time used by consumer                      -->
+    <entry key="minProd">1</entry>      <!-- minimum number of message that producer can produce    -->
+    <entry key="maxProd">3</entry>      <!-- maximum number of message that consumer can produce    -->
 </properties>
