@@ -12,7 +12,8 @@
     <property name="main-class-lock" value="TestProdConsLock"/>
     <property name="main-class-multi" value="TestProdConsMulti"/>
     <property name="main-class-multisync" value="TestProdConsMultiSync"/>
-    <property name="main-class-Additionnel" value="TestProdConsExecutable"/>
+    <property name="main-class-Additionnel1" value="TestProdConsExecutable"/>
+    <property name="main-class-Additionnel2" value="TestProdConsExecutableTaskExecutor"/>
 
     <!-- Target: clean -->
     <target name="clean"> 
@@ -96,10 +97,20 @@
         </java>
     </target>
 
+    <!-- Target: run objAdditionnel1 -->
+    <target name="objAdditionnel1" depends="compile">
+        <echo message="Running objectif additionnel 1 program..."/>
+        <java classname="objAdditionnel1.${main-class-Additionnel1}" fork="true">
+            <classpath>
+                <pathelement location="${build}"/>
+            </classpath>
+        </java>
+    </target>
+
     <!-- Target: run objAdditionnel -->
-    <target name="objAdditionnel" depends="compile">
-        <echo message="Running objectif additionnel program..."/>
-        <java classname="objAdditionnel.${main-class-Additionnel}" fork="true">
+    <target name="objAdditionnel2" depends="compile">
+        <echo message="Running objectif additionnel 2 program..."/>
+        <java classname="objAdditionnel2.${main-class-Additionnel2}" fork="true">
             <classpath>
                 <pathelement location="${build}"/>
             </classpath>

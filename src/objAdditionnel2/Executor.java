@@ -1,26 +1,32 @@
-package objAdditionnel;
+package objAdditionnel2;
 
-public class MessageExec implements Runnable {
+import objAdditionnel1.MessageExec;
+import objAdditionnel1.utils;
 
-    private String tache; // Un message est une chaine de caractère représentant une tache
-    private int value; // La valeur sur laquel réaliser la tache
+public class Executor extends Thread {
 
-    public MessageExec(String mes, int val) {
-        this.tache = mes;
-        this.value = val;
+    private String tache;
+    private int value;
+    private boolean available;
+
+    public Executor(MessageExec m) {
+        this.tache = m.getTache();
+        this.value = m.getValue();
+        available = true;
     }
 
-    public MessageExec() {
-        this.tache = "Default message";
-        this.value = 0;
+    public boolean isAvailable () {
+        return this.available;
     }
 
-    public String toString() {
-        return "tache : '" + tache + "' sur la valeur " + value;
+    public void start(MessageExec m) {
+        this.tache = m.getTache();
+        this.value = m.getValue();
+        this.run();
     }
 
-    @Override
     public void run() {
+        available = false;
         System.out.println("Début du traitement de la tache");
         if (this.value < 0) { // Au vue des diverse tache choisi on interdit les valeurs négative
             System.out.println("Traitement de la tache impossible, valeur négative.");
@@ -63,5 +69,7 @@ public class MessageExec implements Runnable {
             }
             System.out.println("Fin de la tache.");
         }
+        available = true;
     }
+    
 }

@@ -1,11 +1,14 @@
-package objAdditionnel;
+package objAdditionnel2;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
-public class TestProdConsExecutable {
+import objAdditionnel1.ProdConsBufferMonitorExec;
+import objAdditionnel1.ProducerExec;
+
+public class TestProdConsExecutableTaskExecutor {
 
     public static void main(String[] args) throws InvalidPropertiesFormatException, IOException {
 
@@ -28,6 +31,8 @@ public class TestProdConsExecutable {
         // Création du buffer
         ProdConsBufferMonitorExec buffer = new ProdConsBufferMonitorExec(sizeB,prodTime,consTime);
 
+        TaskExecutor taskManager = new TaskExecutor();
+
         // Création des producteurs
         for (int i=0; i<nProd; i++) {
             ProducerExec p = new ProducerExec(buffer,minProd,maxProd);
@@ -37,7 +42,7 @@ public class TestProdConsExecutable {
 
         // Création des consommateurs
         for (int i=0; i<nCons; i++) {
-            ConsumerExec c = new ConsumerExec(buffer);
+            ConsumerTaskExecutor c = new ConsumerTaskExecutor(buffer, taskManager);
             c.setName(String.valueOf(i));
             threadsCons.add(c);
         }
