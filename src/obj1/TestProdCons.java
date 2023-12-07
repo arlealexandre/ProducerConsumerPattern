@@ -12,6 +12,9 @@ public class TestProdCons {
 
         ArrayList<Thread> threads = new ArrayList<>();
 
+        /*
+         * Récupération des propriétés dans le fichier options
+         */
         Properties properties = new Properties();
         properties.loadFromXML(new FileInputStream("options.xml"));
 
@@ -42,10 +45,12 @@ public class TestProdCons {
             threads.add(c);
         }
 
+        // On démarre tous les threads
         for (Thread t : threads) {
             t.start();
         }
 
+        // On attend que tous les threads aient finit (les consommateurs ne terminerons jamais et donc le main non plus)
         for (Thread t : threads) {
             try {
                 t.join();
@@ -53,7 +58,6 @@ public class TestProdCons {
                 e.printStackTrace();
             }
         }
-
-        System.out.println("All threads have finished. Terminating...");
+        System.out.println("All threads have finished. Terminating..."); // Code mort...
     }
 }
