@@ -11,6 +11,8 @@ The different objective are the following:
 - obj4
 - obj5
 - obj6
+- objAdditionnel1
+- objAdditionnel2
 
 ## Run project under Eclipse
 
