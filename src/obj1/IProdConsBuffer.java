@@ -1,7 +1,7 @@
 package obj1;
 
 public interface IProdConsBuffer {
-    
+
     /**
      * Put the message m in the buffer
      **/
@@ -24,8 +24,8 @@ public interface IProdConsBuffer {
     public Message get() throws InterruptedException;
 
     /**
-    * Retrieve n consecutive messages from the prodcons buffer
-    **/
+     * Retrieve n consecutive messages from the prodcons buffer
+     **/
     public Message[] get(int k) throws InterruptedException;
 
     /**
