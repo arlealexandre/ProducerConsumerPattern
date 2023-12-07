@@ -98,8 +98,8 @@
 
     <!-- Target: run objAdditionnel -->
     <target name="objAdditionnel" depends="compile">
-        <echo message="Running objAdditionnel program..."/>
-        <java classname="objAdditionnel.${main-class-additionnel}" fork="true">
+        <echo message="Running objectif additionnel program..."/>
+        <java classname="objAdditionnel.${main-class-Additionnel}" fork="true">
             <classpath>
                 <pathelement location="${build}"/>
             </classpath>
