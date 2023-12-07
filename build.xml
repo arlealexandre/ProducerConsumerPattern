@@ -11,6 +11,11 @@
     <property name="main-class-lock" value="TestProdConsLock"/>
     <property name="main-class-multi" value="TestProdConsMulti"/>
     <property name="main-class-multisync" value="TestProdConsMultiSync"/>
+    <property name="main-class-Additionnel" value="
+
+import obj1.Consumer;
+import obj1.ProdConsBufferMonitor;
+import obj1.Producer;"/>
 
     <!-- Target: clean -->
     <target name="clean"> 
@@ -88,6 +93,16 @@
     <target name="obj6" depends="compile">
         <echo message="Running objectif6 program..."/>
         <java classname="obj6.${main-class-multisync}" fork="true">
+            <classpath>
+                <pathelement location="${build}"/>
+            </classpath>
+        </java>
+    </target>
+
+    <!-- Target: run objAdditionnel -->
+    <target name="objAdditionnel" depends="compile">
+        <echo message="Running objAdditionnel program..."/>
+        <java classname="objAdditionnel.${main-class-additionnel}" fork="true">
             <classpath>
                 <pathelement location="${build}"/>
             </classpath>

@@ -8,6 +8,10 @@ public class Consumer extends Thread {
         this.buffer = b;
     }
 
+    /*
+     * Les consomateurs on une seul tache qu'il effectue en boucle, récupérer un
+     * message dans le buffer
+     */
     public void run() {
         while (true) {
             try {
@@ -17,5 +21,4 @@ public class Consumer extends Thread {
             }
         }
     }
-    
 }
