@@ -2,9 +2,9 @@ package obj6;
 
 import obj1.Message;
 
-/*
- * This MessageMultiSync class extends Message class. It add a new parameter nbToBeConsumed that corresponds 
- * to the number of copy of the current message that must be consumed by consumers
+/**
+ * Cette classe MessageMultiSync hérite de la première classe Message. Elle ajoute un nouveau paramètre nbToBeConsumed,
+ * qui correspond au nombre de copie de ce message qui doivent être consommé.
  */
 public class MessageMultiSync extends Message {
 
@@ -15,10 +15,12 @@ public class MessageMultiSync extends Message {
         nbToBeConsumed = n;
     }
 
+    // décrémente de 1 le nombre de copie consommé
     public void copyConsumed() {
         this.nbToBeConsumed--;
     }
 
+    // un message est consommé lorsque toutes ses copies ont été consommé
     public boolean isMessageConsumed() {
         return nbToBeConsumed==0;
     }

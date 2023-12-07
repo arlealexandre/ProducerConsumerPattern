@@ -57,6 +57,10 @@ public class TestProdConsMultiSync {
             try {t.join();} catch (InterruptedException e) {e.printStackTrace();}
         }
 
+        while (buffer.nmsg()!=0) {
+            
+        }
+
         System.out.println("All threads have finished. Terminating...");
 
     }

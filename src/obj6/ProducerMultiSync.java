@@ -18,7 +18,7 @@ public class ProducerMultiSync extends Thread {
 
     public void run() {
         for (int i=1; i<=nbMessage; i++) {  
-            int n = rand.nextInt(buffer.getSize())+1; // number of copies between 1 and 5
+            int n = rand.nextInt(buffer.getSize())+1; // number of copies between 1 and buffer size
             MessageMultiSync m = new MessageMultiSync("M"+this.getName()+Integer.toString(i),n);
             this.buffer.put(m, n); // put n copies of message m
         }

@@ -1,3 +1,5 @@
+package objAdditionnel;
+
 import obj1.Message;
 import obj1.ProdConsBuffer;
 

@@ -8,22 +8,25 @@ import obj1.ProdConsBuffer;
 
 public class ProdConsBufferLock extends ProdConsBuffer {
 
+    /* Nous utilisons ici un verrou et deux conditions */
     ReentrantLock lock;
     Condition notEmpty, notFull;
 
     public ProdConsBufferLock (int size, int prodTime, int consTime) {
         super(size,prodTime,consTime);
-        this.lock = new ReentrantLock();
-        this.notEmpty = lock.newCondition();
-        this.notFull = lock.newCondition();
+        this.lock = new ReentrantLock(); // verrou pour gérer les sections critiques
+        this.notEmpty = lock.newCondition(); // conditions pour gérer les consommateurs
+        this.notFull = lock.newCondition(); // conditions pour gérer les producteurs
     }
 
     public void put(Message m) {
     
+        // on vérouille le verrou -> début de la section critique
         lock.lock();
 
         try {
 
+            // le producteur se met en attente sur la condition notFull tant que le buffer est plein
             while (this.nbMessage == size) {
                 try { notFull.await(); } catch (InterruptedException e) { e.printStackTrace(); }
             }
@@ -38,21 +41,25 @@ public class ProdConsBufferLock extends ProdConsBuffer {
             this.nbMessage++;
             this.totalNbMessage++;
             
+            // le producteur libère un consommateur qui est en attente sur la condition notEmpty
             notEmpty.signal();
 
         } finally {
+            // on dévérouille le verrou -> fin de la section critique
             lock.unlock();
         }
-
     }
 
     public Message get() throws InterruptedException {
 
+        // on vérouille le verrou -> début de la section critique
         lock.lock();
 
         try {
+
+            // le consommateur se met en attente sur la condition notEmpty tant que le buffer ne contient pas de message à lire
             while (this.nbMessage == 0) {
-            notEmpty.await();
+                try { notFull.await(); } catch (InterruptedException e) { e.printStackTrace(); }
             }
      
             int consTime = (int)Math.floor(Math.random() * this.maxConsTime); // We randomised consTime for better result but we keep an average of "consTime"
@@ -65,10 +72,12 @@ public class ProdConsBufferLock extends ProdConsBuffer {
             this.out = (out + 1) % size;
             this.nbMessage--;
 
+            // le consommateur libère un producteur qui est en attente sur la condition notFull
             notFull.signal();
             
             return res;
         } finally {
+            // on dévérouille le verrou -> fin de la section critique
             lock.unlock();
         }
 

@@ -12,11 +12,7 @@
     <property name="main-class-lock" value="TestProdConsLock"/>
     <property name="main-class-multi" value="TestProdConsMulti"/>
     <property name="main-class-multisync" value="TestProdConsMultiSync"/>
-    <property name="main-class-Additionnel" value="
-
-import obj1.Consumer;
-import obj1.ProdConsBufferMonitor;
-import obj1.Producer;"/>
+    <property name="main-class-Additionnel" value="TestProdConsExecutable"/>
 
     <!-- Target: clean -->
     <target name="clean"> 
