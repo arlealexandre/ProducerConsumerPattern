@@ -6,7 +6,7 @@ import objAdditionnel1.ProdConsBufferExec;
 public class ConsumerTaskExecutor extends Thread {
 
     private ProdConsBufferExec buffer;
-    private TaskExecutor taskManager;
+    private TaskExecutor taskManager; // Le consomateur est en lien avec le manager des taches, en effet il lui transmet après lecture
 
     public ConsumerTaskExecutor(ProdConsBufferExec b, TaskExecutor m) {
         this.buffer = b;
@@ -17,11 +17,10 @@ public class ConsumerTaskExecutor extends Thread {
         while (true) {
             try {
                 MessageExec instruction = this.buffer.get();
-                this.taskManager.askTask(instruction);
+                this.taskManager.askTask(instruction); // Il donne la tache au manager après l'avoir lu
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
     }
-    
 }

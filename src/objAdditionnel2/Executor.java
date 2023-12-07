@@ -5,26 +5,33 @@ import objAdditionnel1.utils;
 
 public class Executor extends Thread {
 
-    private String tache;
-    private int value;
-    private boolean available;
+    private String tache; // La tache que l'executeur doit réaliser
+    private int value; // la valeur sur laquel il réalise sa tache
+    private boolean available; // Vaut true si il ne réalise pas de tache en ce moment et faux sinon
 
     public Executor(MessageExec m) {
         this.tache = m.getTache();
         this.value = m.getValue();
-        available = true;
+        available = false;
+        this.run();
     }
 
     public boolean isAvailable () {
         return this.available;
     }
 
-    public void start(MessageExec m) {
+    /*
+     * Démarre une nouvelle tache, c'est au manager de gérer le fait qu'il puisse déjà être entrain d'en réaliser une
+     */
+    public void startNewTask(MessageExec m) {
         this.tache = m.getTache();
         this.value = m.getValue();
         this.run();
     }
 
+    /*
+     * Réalise la tache qu'il doit faire
+     */
     public void run() {
         available = false;
         System.out.println("Début du traitement de la tache");
@@ -71,5 +78,4 @@ public class Executor extends Thread {
         }
         available = true;
     }
-    
 }
