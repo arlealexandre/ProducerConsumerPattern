@@ -1,4 +1,4 @@
-# Projet-PC-Prod-Cons
+# Producer Consumer Pattern
 
 ## Run the code
 
